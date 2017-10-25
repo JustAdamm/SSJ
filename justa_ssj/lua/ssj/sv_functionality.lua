@@ -89,7 +89,6 @@ end
 local function InterfaceResponse(len, pl)
 	-- The key
 	local k = net.ReadInt(6)
-	print(k)
 
 	-- The setting
 	pl.SSJ["Settings"][k] = (not pl.SSJ["Settings"][k])
