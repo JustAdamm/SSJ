@@ -9,3 +9,5 @@ format: SSJ_Col = Color( R, G, B )
 (see: www.colorpicker.com)
 
 Note: This ONLY works on GRAVIOUS's version of Bunny Hop!
+& btw i sort of rushed the ui so i dont really care how it looks
+deal with it
