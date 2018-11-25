@@ -26,7 +26,7 @@ local function ToggleGUI(data, update)
 	gui.EnableScreenClicker(true)
 
 	ssj = vgui.Create("EditablePanel")
-	ssj:SetSize(300, 176+28)
+	ssj:SetSize(300, 228)
 	ssj:SetPos(10, ScrH() / 2 - ssj:GetTall()/2)
 	ssj.Paint = function(self, width, height)
 		surface.SetDrawColor(Color(35, 35, 35, 255))
@@ -48,6 +48,7 @@ local function ToggleGUI(data, update)
 		{"Show Speed Difference", "On", "Off"},
 		{"Show Height Difference", "On", "Off"},
 		{"Show Observers Stats", "On", "Off"},
+		{"Show Current Time", "On", "Off"},
 		{"Close", "Yes", "No"}
 	}
 
@@ -79,7 +80,7 @@ local function ToggleGUI(data, update)
 			draw.SimpleText(setting[2], "SSJ_Label", width - 14, 10, color_white, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
 		end
 		but.OnMousePressed = function(self)
-			if (setting_id == 6) then
+			if (setting_id == 7) then
 				ToggleGUI()
 				return
 			end
