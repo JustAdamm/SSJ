@@ -16,7 +16,7 @@ local function LoadPlayer(pl)
 
 		pl.SSJ = {}
 		pl.SSJ["Jumps"] = {}
-		pl.SSJ["Settings"] = ssj and util.JSONToTable(ssj) or {false, true, false, false, true}
+		pl.SSJ["Settings"] = ssj and util.JSONToTable(ssj) or {false, true, false, false, true, false}
 	end)
 end
 hook.Add("PlayerInitialSpawn", "SSJ.LoadPlayer", LoadPlayer)
@@ -106,6 +106,19 @@ function SSJ:Print(pl, str)
 	net.Send(pl)
 end
 
+-- Ripped
+local fl, fo = math.floor, string.format
+local function ConvertTime( ns )
+	print(ns)
+	if ns <= 60 then
+		return fo( "%.2d.%.3d", fl( ns % 60 ), fl( ns * 1000 % 1000 ) )
+	elseif ns > 3600 then
+		return fo( "%d:%.2d:%.2d.%.3d", fl( ns / 3600 ), fl( ns / 60 % 60 ), fl( ns % 60 ), fl( ns * 1000 % 1000 ) )
+	else
+		return fo( "%.2d:%.2d.%.3d", fl( ns / 60 % 60 ), fl( ns % 60 ), fl( ns * 1000 % 1000 ) )
+	end
+end
+
 -- Display 
 function SSJ:Display(pl)
 	-- No SSJ Table? What.
@@ -178,6 +191,17 @@ function SSJ:Display(pl)
 			table.insert(str, " | Speed ∆: ")
 			table.insert(str, SSJ_Col)
 			table.insert(str, tostring(difference))
+			table.insert(str, color_white)
+		end
+
+		-- Time (for greatchen)
+		if (#pl.SSJ["Jumps"] > 1) and (v.SSJ["Settings"][6]) then
+			local currenttime = v.Tn and CurTime() - v.Tn or 0
+			currenttime = ConvertTime(currenttime)
+
+			table.insert(str, " | Time: ")
+			table.insert(str, SSJ_Col)
+			table.insert(str, currenttime)
 			table.insert(str, color_white)
 		end
 
